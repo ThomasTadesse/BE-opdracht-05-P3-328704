@@ -15,8 +15,19 @@
             <form action="{{ route('product.index') }}" method="GET" class="flex space-x-4">
                
             <!-- Dropdown voor startdatum & einddatum -->
-                
-                
+                <div class="flex items-center space-x-2">
+                    <input type="date" 
+                           name="start_date" 
+                           class="rounded-lg border-gray-300 shadow-sm" 
+                           value="{{ request('start_date') }}">
+                    
+                    <span class="text-gray-500">tot</span>
+                    
+                    <input type="date" 
+                           name="end_date" 
+                           class="rounded-lg border-gray-300 shadow-sm" 
+                           value="{{ request('end_date') }}">
+                </div>
 
                 <!-- Maak Selectie Knop -->
                 <button type="submit" class="bg-blue-300 text-white px-4 py-2 rounded-lg shadow hover:bg-green-300">

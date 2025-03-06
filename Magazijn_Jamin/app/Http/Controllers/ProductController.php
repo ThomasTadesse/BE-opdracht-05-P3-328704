@@ -8,10 +8,18 @@ use Exception;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $producten = DB::select('CALL spGetProducts()');
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            if ($startDate && $endDate) {
+                $producten = DB::select('CALL spGetProductsByDateRange(?, ?)', [$startDate, $endDate]);
+            } else {
+                $producten = DB::select('CALL spGetProducts()');
+            }
+
             return view('product.index', compact('producten'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error fetching products: ' . $e->getMessage());
