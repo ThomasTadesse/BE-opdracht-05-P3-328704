@@ -8,16 +8,15 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Specificatie Geleverde Producten</h1>
+        <h1 class="text-3xl font-bold mb-6 underline">Specificatie Geleverde Producten</h1>
 
         <!-- Details sectie -->
         <div class="bg-white shadow-md rounded-lg p-6 mb-8">
-            <h2 class="text-xl font-semibold mb-4">Details</h2>
             <div class="space-y-2">
-                <p class="text-gray-700"><span class="font-bold">Startdatum:</span> 08-04-2023</p>
-                <p class="text-gray-700"><span class="font-bold">Einddatum:</span> 19-04-2023</p>
-                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> Minitompjes</p>
-                <p class="text-gray-700"><span class="font-bold">Allergenen:</span> Gluten, gelatine, AZO-kleurstof</p>
+                <p class="text-gray-700"><span class="font-bold">Startdatum:</span> </p>
+                <p class="text-gray-700"><span class="font-bold">Einddatum:</span> </p>
+                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> </p>
+                <p class="text-gray-700"><span class="font-bold">Allergenen:</span>  </p>
             </div>
         </div>
 
@@ -33,19 +32,19 @@
                 </thead>
                 <tbody>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4 border">18-04-2023</td>
-                        <td class="py-3 px-4 border">21</td>
+                        <td class="py-3 px-4 border"> </td>
+                        <td class="py-3 px-4 border"> </td>
                     </tr>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4 border">09-04-2023</td>
-                        <td class="py-3 px-4 border">23</td>
+                        <td class="py-3 px-4 border"> </td>
+                        <td class="py-3 px-4 border"> </td>
                     </tr>
                 </tbody>
             </table>
             
             <!-- Terug-knop -->
             <div class="mt-6">
-                <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                <a href="{{ url()->previous() }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
                     Terug
                 </a>
             </div>
