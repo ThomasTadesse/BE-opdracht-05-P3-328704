@@ -16,17 +16,15 @@ return new class extends Migration
         CREATE PROCEDURE spGetProducts()
         BEGIN
             SELECT 
-                ALRG.id               AS AllergeenId,
+                PRCT.id              AS Id,
                 PRCT.Naam            AS ProductNaam,
                 LVR.Naam             AS LeverancierNaam,
                 LVR.Contactpersoon   AS Contactpersoon,
-                MGZN.AantalAanwezig  AS AantalAanwezig
+                MGZN.AantalAanwezig  AS AantalAanwezig,
+                PPL.DatumLevering    AS DatumLevering,
+                PPL.DatumEerstVolgendeLevering AS DatumEerstVolgendeLevering
             FROM 
-                Allergeen ALRG
-            JOIN 
-                ProductPerAllergeen PRAL ON ALRG.Id = PRAL.AllergeenId
-            JOIN 
-                Product PRCT ON PRAL.ProductId = PRCT.Id
+                Product PRCT
             LEFT JOIN 
                 Magazijn MGZN ON PRCT.Id = MGZN.ProductId
             LEFT JOIN
@@ -34,16 +32,17 @@ return new class extends Migration
             LEFT JOIN
                 Leverancier LVR ON PPL.LeverancierId = LVR.Id
             WHERE 
-                ALRG.IsActief = 1 
-                AND PRCT.IsActief = 1
+                PRCT.IsActief = 1
             ORDER BY 
-                LeverancierNaam ASC;
+                LeverancierNaam DESC;
         END;
         ');
 
         DB::unprepared('
             DROP PROCEDURE IF EXISTS spGetProductDetails;
-            CREATE PROCEDURE spGetProductDetails()
+            CREATE PROCEDURE spGetProductDetails(
+                IN productId INT
+            )
             BEGIN
                 SELECT 
                     PRCT.Naam            AS ProductNaam,
@@ -61,9 +60,41 @@ return new class extends Migration
                 WHERE 
                     PRCT.IsActief = 1
                     AND ALRG.IsActief = 1
+                    AND PRCT.Id = productId
                 ORDER BY 
                     PRCT.Naam ASC,
                     ALRG.Naam ASC;
+            END;
+        ');
+
+        DB::unprepared('
+            DROP PROCEDURE IF EXISTS spGetProductsByDateRange;
+            CREATE PROCEDURE spGetProductsByDateRange(
+                IN startDate DATE,
+                IN endDate DATE
+            )
+            BEGIN
+                SELECT 
+                    PRCT.id              AS Id,
+                    PRCT.Naam            AS ProductNaam,
+                    LVR.Naam             AS LeverancierNaam,
+                    LVR.Contactpersoon   AS Contactpersoon,
+                    MGZN.AantalAanwezig  AS AantalAanwezig,
+                    PPL.DatumLevering    AS DatumLevering,
+                    PPL.DatumEerstVolgendeLevering AS DatumEerstVolgendeLevering
+                FROM 
+                    Product PRCT
+                LEFT JOIN 
+                    Magazijn MGZN ON PRCT.Id = MGZN.ProductId
+                LEFT JOIN
+                    ProductPerLeverancier PPL ON PRCT.Id = PPL.ProductId
+                LEFT JOIN
+                    Leverancier LVR ON PPL.LeverancierId = LVR.Id
+                WHERE 
+                    PRCT.IsActief = 1
+                    AND PPL.DatumLevering BETWEEN startDate AND endDate
+                ORDER BY 
+                    LeverancierNaam DESC;
             END;
         ');
     }
@@ -75,5 +106,6 @@ return new class extends Migration
     {
         DB::unprepared('DROP PROCEDURE IF EXISTS spGetProducts;');
         DB::unprepared('DROP PROCEDURE IF EXISTS spGetProductDetails;');
+        DB::unprepared('DROP PROCEDURE IF EXISTS spGetProductsByDateRange;');
     }
 };
