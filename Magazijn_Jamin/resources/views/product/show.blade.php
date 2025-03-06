@@ -15,8 +15,13 @@
             <div class="space-y-2">
                 <p class="text-gray-700"><span class="font-bold">Startdatum:</span> </p>
                 <p class="text-gray-700"><span class="font-bold">Einddatum:</span> </p>
-                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> </p>
-                <p class="text-gray-700"><span class="font-bold">Allergenen:</span>  </p>
+                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> {{ $products[0]->ProductNaam }}</p>
+                <p class="text-gray-700">
+                    <span class="font-bold">Allergenen:</span> 
+                    @foreach($uniqueAllergenen as $product)
+                        {{ $product->AllergeenNaam }}@if(!$loop->last), @endif
+                    @endforeach
+                </p>
             </div>
         </div>
 
@@ -31,14 +36,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($uniqueDeliveries as $product)
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4 border"> </td>
-                        <td class="py-3 px-4 border"> </td>
+                        <td class="py-3 px-4 border">{{ date('d-m-Y', strtotime($product->DatumLevering)) }}</td>
+                        <td class="py-3 px-4 border">{{ $product->Aantal }}</td>
                     </tr>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4 border"> </td>
-                        <td class="py-3 px-4 border"> </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
             

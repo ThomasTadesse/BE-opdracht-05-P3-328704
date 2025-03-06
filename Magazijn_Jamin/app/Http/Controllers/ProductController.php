@@ -15,6 +15,14 @@ class ProductController extends Controller
             $endDate = $request->input('end_date');
 
             if ($startDate && $endDate) {
+                // Validate dates
+                if (!strtotime($startDate) || !strtotime($endDate)) {
+                    return redirect()->back()->with('error', 'Invalid date format');
+                }
+                if (strtotime($startDate) > strtotime($endDate)) {
+                    return redirect()->back()->with('error', 'Start date cannot be later than end date');
+                }
+                
                 $producten = DB::select('CALL spGetProductsByDateRange(?, ?)', [$startDate, $endDate]);
             } else {
                 $producten = DB::select('CALL spGetProducts()');
@@ -29,13 +37,25 @@ class ProductController extends Controller
     public function show($id)
     {
         try {
-            $productDetails = DB::select('CALL spGetProductDetails(?)', [$id]);
+            $products = DB::select('CALL spGetProductDetails(?)', [$id]);
             
-            if (empty($productDetails)) {
+            if (empty($products)) {
                 return redirect()->route('product.index')->with('error', 'Product not found');
             }
 
-            return view('product.show', compact('productDetails'));
+            // Convert to collection and handle duplicates
+            $products = collect($products);
+            $uniqueDeliveries = $products->unique(function ($item) {
+                return $item->DatumLevering . $item->Aantal;
+            });
+            
+            $uniqueAllergenen = $products->unique('AllergeenNaam');
+
+            return view('product.show', [
+                'products' => $products,
+                'uniqueDeliveries' => $uniqueDeliveries,
+                'uniqueAllergenen' => $uniqueAllergenen
+            ]);
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error fetching product details: ' . $e->getMessage());
         }
