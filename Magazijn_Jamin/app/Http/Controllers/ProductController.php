@@ -50,11 +50,15 @@ class ProductController extends Controller
             });
             
             $uniqueAllergenen = $products->unique('AllergeenNaam');
+            $productName = $products->first()->ProductNaam;
 
             return view('product.show', [
                 'products' => $products,
                 'uniqueDeliveries' => $uniqueDeliveries,
-                'uniqueAllergenen' => $uniqueAllergenen
+                'uniqueAllergenen' => $uniqueAllergenen,
+                'startDate' => request('start_date'),
+                'endDate' => request('end_date'),
+                'productName' => $productName
             ]);
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Error fetching product details: ' . $e->getMessage());

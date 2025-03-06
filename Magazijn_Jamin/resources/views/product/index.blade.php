@@ -60,7 +60,7 @@
                             <td class="py-3 px-4">{{ $product->ProductNaam }}</td>
                             <td class="py-3 px-4">{{ $product->AantalAanwezig }}</td>
                             <td class="py-3 px-4">
-                                <a href="{{ route('product.show', $product->Id) }}" class="text-blue-500 hover:text-blue-700 text-xl">❔</a>
+                                <a href="{{ route('product.show', ['id' => $product->Id, 'start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="text-blue-500 hover:text-blue-700 text-xl">❔</a>
                             </td>
                         </tr>
                     @endforeach

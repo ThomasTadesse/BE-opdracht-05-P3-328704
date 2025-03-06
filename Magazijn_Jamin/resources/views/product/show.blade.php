@@ -13,9 +13,9 @@
         <!-- Details sectie -->
         <div class="bg-white shadow-md rounded-lg p-6 mb-8">
             <div class="space-y-2">
-                <p class="text-gray-700"><span class="font-bold">Startdatum:</span> </p>
-                <p class="text-gray-700"><span class="font-bold">Einddatum:</span> </p>
-                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> {{ $products[0]->ProductNaam }}</p>
+                <p class="text-gray-700"><span class="font-bold">Startdatum:</span> {{ $startDate ?? 'Geen datum geselecteerd' }}</p>
+                <p class="text-gray-700"><span class="font-bold">Einddatum:</span> {{ $endDate ?? 'Geen datum geselecteerd' }}</p>
+                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> {{ $productName }}</p>
                 <p class="text-gray-700">
                     <span class="font-bold">Allergenen:</span> 
                     @foreach($uniqueAllergenen as $product)
