@@ -66,7 +66,7 @@
             </tbody>
         </table>
         <div class="mt-6 space-x-4">
-            <a href="{{ url()->previous() }}" class="bg-blue-300 text-white px-4 py-2 rounded-lg shadow hover:bg-green-300">
+            <a href="{{ route('welcome') }}" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
                 Home
             </a>
         </div>
