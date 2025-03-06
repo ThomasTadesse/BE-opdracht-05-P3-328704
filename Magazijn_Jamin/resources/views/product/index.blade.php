@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allergenen</title>
+    <title>Overzicht Geleverde Producten</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Overzicht Allergenen</h1>
+        <h1 class="text-3xl font-bold mb-6">Overzicht Geleverde Producten</h1>
         
         <!-- Dropdown en Knop -->
         <div class="flex space-x-4 mb-8">
-            <form action="{{ route('allergeen.index') }}" method="GET" class="flex space-x-4">
-                <!-- Dropdown voor Allergenen -->
-                <p class="bold text-xl">Allergenen:</p>
-                <select name="filter" class="p-2 border border-gray-300 rounded-lg shadow-sm">
-                    <option value="">Alle allergenen</option>
-                    @foreach($uniqueAllergenen as $naam)
-                        <option value="{{ $naam }}" {{ request('filter') == $naam ? 'selected' : '' }}>
-                            {{ $naam }}
-                        </option>
-                    @endforeach
-                </select>
+            <form action="{{ route('product.index') }}" method="GET" class="flex space-x-4">
+               
+            <!-- Dropdown voor startdatum & einddatum -->
+                
+                
 
                 <!-- Maak Selectie Knop -->
                 <button type="submit" class="bg-blue-300 text-white px-4 py-2 rounded-lg shadow hover:bg-green-300">
@@ -31,26 +25,26 @@
             </form>
         </div>
 
-        <!-- Tabel voor Overzicht Allergenen -->
+        <!-- Tabel voor Overzicht Producten -->
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead>
                 <tr class="bg-gray-400 text-white">
-                    <th class="py-3 px-4 text-left">Naam Product</th>
-                    <th class="py-3 px-4 text-left">Naam Allergeen</th>
-                    <th class="py-3 px-4 text-left">Omschrijving</th>
-                    <th class="py-3 px-4 text-left">Aantal Aanwezig</th>
-                    <th class="py-3 px-4 text-left">Info</th>
+                    <th class="py-3 px-4 text-left">Naam Leverancier</th>
+                    <th class="py-3 px-4 text-left">Contactpersoon</th>
+                    <th class="py-3 px-4 text-left">Productnaam</th>
+                    <th class="py-3 px-4 text-left">Totaal Geleverd</th>
+                    <th class="py-3 px-4 text-left">Specificatie</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach($allergenen as $allergeen)
+                @foreach($producten as $product)
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4">{{ $allergeen->ProductNaam }}</td>
-                        <td class="py-3 px-4">{{ $allergeen->AllergeenNaam }}</td>
-                        <td class="py-3 px-4">{{ $allergeen->Omschrijving }}</td>
-                        <td class="py-3 px-4">{{ $allergeen->AantalAanwezig }}  </td>
+                        <td class="py-3 px-4">{{ $product->LeverancierNaam }}</td>
+                        <td class="py-3 px-4">{{ $product->Contactpersoon }}</td>
+                        <td class="py-3 px-4">{{ $product->ProductNaam }}</td>
+                        <td class="py-3 px-4">{{ $product->AantalAanwezig }}</td>
                         <td class="py-3 px-4">
-                            <a href="{{ route('allergeen.show', $allergeen->Id) }}" class="text-blue-500 hover:text-blue-700 text-xl">❔</a>
+                            <a href="{{ route('product.show', $product->Id) }}" class="text-blue-500 hover:text-blue-700 text-xl">❔</a>
                         </td>
                     </tr>
                 @endforeach

@@ -16,17 +16,13 @@ return new class extends Migration
         CREATE PROCEDURE spGetProducts()
         BEGIN
             SELECT 
-                ALRG.id               AS AllergeenId,
+                PRCT.id              AS Id,
                 PRCT.Naam            AS ProductNaam,
                 LVR.Naam             AS LeverancierNaam,
                 LVR.Contactpersoon   AS Contactpersoon,
                 MGZN.AantalAanwezig  AS AantalAanwezig
             FROM 
-                Allergeen ALRG
-            JOIN 
-                ProductPerAllergeen PRAL ON ALRG.Id = PRAL.AllergeenId
-            JOIN 
-                Product PRCT ON PRAL.ProductId = PRCT.Id
+                Product PRCT
             LEFT JOIN 
                 Magazijn MGZN ON PRCT.Id = MGZN.ProductId
             LEFT JOIN
@@ -34,10 +30,9 @@ return new class extends Migration
             LEFT JOIN
                 Leverancier LVR ON PPL.LeverancierId = LVR.Id
             WHERE 
-                ALRG.IsActief = 1 
-                AND PRCT.IsActief = 1
+                PRCT.IsActief = 1
             ORDER BY 
-                LeverancierNaam ASC;
+                LeverancierNaam DESC;
         END;
         ');
 
