@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Overzicht Geleverde Producten</h1>
+        <h1 class="text-3xl font-bold mb-6 underline">Overzicht Geleverde Producten</h1>
         
         <!-- Dropdown en Knop -->
         <div class="flex space-x-4 mb-8">
