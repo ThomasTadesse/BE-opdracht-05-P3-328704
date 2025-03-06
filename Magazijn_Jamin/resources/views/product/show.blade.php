@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,51 +10,45 @@
     <div class="container mx-auto px-4 py-8">
         <h1 class="text-3xl font-bold mb-6">Specificatie Geleverde Producten</h1>
 
-        <!-- Sectie voor Simulatie, Evaluatie, Productie en Allergenen -->
+        <!-- Details sectie -->
         <div class="bg-white shadow-md rounded-lg p-6 mb-8">
             <h2 class="text-xl font-semibold mb-4">Details</h2>
-            <div class="space-y-4">
-                <div>
-                    <p class="text-gray-700"><span class="font-bold">Simulatie:</span> 0-04-2023</p>
-                </div>
-                <div>
-                    <p class="text-gray-700"><span class="font-bold">Evaluatie:</span> 14:04-2023</p>
-                </div>
-                <div>
-                    <p class="text-gray-700"><span class="font-bold">Productie:</span> Mushrooms</p>
-                </div>
-                <div>
-                    <p class="text-gray-700"><span class="font-bold">Allergenen:</span> Guts, gelain, AZO-bloody</p>
-                </div>
+            <div class="space-y-2">
+                <p class="text-gray-700"><span class="font-bold">Startdatum:</span> 08-04-2023</p>
+                <p class="text-gray-700"><span class="font-bold">Einddatum:</span> 19-04-2023</p>
+                <p class="text-gray-700"><span class="font-bold">Productnaam:</span> Minitompjes</p>
+                <p class="text-gray-700"><span class="font-bold">Allergenen:</span> Gluten, gelatine, AZO-kleurstof</p>
             </div>
         </div>
 
-        <!-- Tabel voor Column Covering -->
+        <!-- Leveringsgegevens tabel -->
         <div class="bg-white shadow-md rounded-lg p-6">
-            <h2 class="text-xl font-semibold mb-4">Column Covering</h2>
-            <table class="min-w-full">
+            <h2 class="text-xl font-semibold mb-4">Leveringsgegevens</h2>
+            <table class="min-w-full border border-gray-300">
                 <thead>
                     <tr class="bg-gray-400 text-white">
-                        <th class="py-3 px-4 text-left">Datum</th>
-                        <th class="py-3 px-4 text-left">Partial</th>
+                        <th class="py-3 px-4 text-left border">Datum levering</th>
+                        <th class="py-3 px-4 text-left border">Aantal</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4">10-04-2023</td>
-                        <td class="py-3 px-4">21</td>
+                        <td class="py-3 px-4 border">18-04-2023</td>
+                        <td class="py-3 px-4 border">21</td>
                     </tr>
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4">05-04-2023</td>
-                        <td class="py-3 px-4">23</td>
+                        <td class="py-3 px-4 border">09-04-2023</td>
+                        <td class="py-3 px-4 border">23</td>
                     </tr>
                 </tbody>
             </table>
-            <div class="mt-6 space-x-4">
-            <a href="{{ url()->previous() }}" class="bg-blue-300 text-white px-4 py-2 rounded-lg shadow hover:bg-green-300">
-                Terug
-            </a>
-        </div>
+            
+            <!-- Terug-knop -->
+            <div class="mt-6">
+                <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                    Terug
+                </a>
+            </div>
         </div>
     </div>
 </body>

@@ -41,30 +41,36 @@
         </div>
         
         <!-- Tabel voor Overzicht Producten -->
-        <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead>
-                <tr class="bg-gray-400 text-white">
-                    <th class="py-3 px-4 text-left">Naam Leverancier</th>
-                    <th class="py-3 px-4 text-left">Contactpersoon</th>
-                    <th class="py-3 px-4 text-left">Productnaam</th>
-                    <th class="py-3 px-4 text-left">Totaal Geleverd</th>
-                    <th class="py-3 px-4 text-left">Specificatie</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($producten as $product)
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="py-3 px-4">{{ $product->LeverancierNaam }}</td>
-                        <td class="py-3 px-4">{{ $product->Contactpersoon }}</td>
-                        <td class="py-3 px-4">{{ $product->ProductNaam }}</td>
-                        <td class="py-3 px-4">{{ $product->AantalAanwezig }}</td>
-                        <td class="py-3 px-4">
-                            <a href="{{ route('product.show', $product->Id) }}" class="text-blue-500 hover:text-blue-700 text-xl">❔</a>
-                        </td>
+        @if(count($producten) > 0)
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead>
+                    <tr class="bg-gray-400 text-white">
+                        <th class="py-3 px-4 text-left">Naam Leverancier</th>
+                        <th class="py-3 px-4 text-left">Contactpersoon</th>
+                        <th class="py-3 px-4 text-left">Productnaam</th>
+                        <th class="py-3 px-4 text-left">Totaal Geleverd</th>
+                        <th class="py-3 px-4 text-left">Specificatie</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($producten as $product)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-3 px-4">{{ $product->LeverancierNaam }}</td>
+                            <td class="py-3 px-4">{{ $product->Contactpersoon }}</td>
+                            <td class="py-3 px-4">{{ $product->ProductNaam }}</td>
+                            <td class="py-3 px-4">{{ $product->AantalAanwezig }}</td>
+                            <td class="py-3 px-4">
+                                <a href="{{ route('product.show', $product->Id) }}" class="text-blue-500 hover:text-blue-700 text-xl">❔</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 my-4 rounded text-center" role="alert">
+                <p>Er zijn geen leveringen geweest van producten in deze periode</p>
+            </div>
+        @endif
         <div class="mt-6 space-x-4">
             <a href="{{ route('welcome') }}" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded">
                 Home
