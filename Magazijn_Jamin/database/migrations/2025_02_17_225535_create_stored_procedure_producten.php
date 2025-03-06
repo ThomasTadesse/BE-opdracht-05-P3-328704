@@ -43,7 +43,9 @@ return new class extends Migration
 
         DB::unprepared('
             DROP PROCEDURE IF EXISTS spGetProductDetails;
-            CREATE PROCEDURE spGetProductDetails()
+            CREATE PROCEDURE spGetProductDetails(
+                IN productId INT
+            )
             BEGIN
                 SELECT 
                     PRCT.Naam            AS ProductNaam,
@@ -61,6 +63,7 @@ return new class extends Migration
                 WHERE 
                     PRCT.IsActief = 1
                     AND ALRG.IsActief = 1
+                    AND PRCT.Id = productId
                 ORDER BY 
                     PRCT.Naam ASC,
                     ALRG.Naam ASC;
